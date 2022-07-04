@@ -86,14 +86,90 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./assets/bottom-right-elips.png":
+/*!***************************************!*\
+  !*** ./assets/bottom-right-elips.png ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "0d7b5f6c71291648b466c3eddd48d796.png";
+
+/***/ }),
+
+/***/ "./assets/top-left-elips.png":
+/*!***********************************!*\
+  !*** ./assets/top-left-elips.png ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "b20c408456f614a2870e18fe7b813145.png";
+
+/***/ }),
+
 /***/ "./js/main.js":
 /*!********************!*\
   !*** ./js/main.js ***!
   \********************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _main_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../main.scss */ "./main.scss");
+/* harmony import */ var _main_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_main_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _assets_top_left_elips_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../assets/top-left-elips.png */ "./assets/top-left-elips.png");
+/* harmony import */ var _assets_top_left_elips_png__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_assets_top_left_elips_png__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _assets_bottom_right_elips_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../assets/bottom-right-elips.png */ "./assets/bottom-right-elips.png");
+/* harmony import */ var _assets_bottom_right_elips_png__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_assets_bottom_right_elips_png__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _todos__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./todos */ "./js/todos.js");
+
+
+
+
+console.log(_todos__WEBPACK_IMPORTED_MODULE_3__["default"]);
+
+var render = function render() {
+  console.log("ready");
+};
+
+window.addEventListener('DOMContentLoaded', render);
+
+/***/ }),
+
+/***/ "./js/todos.js":
+/*!*********************!*\
+  !*** ./js/todos.js ***!
+  \*********************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var todos = [{
+  id: "1",
+  text: "Complete My Assessment",
+  created: "Wed Jan 22 2020 07:02:0",
+  completed: false
+}, {
+  id: "2",
+  text: "Complete My Assessment",
+  created: "Wed Jan 22 2020 07:03:0",
+  completed: false
+}];
+/* harmony default export */ __webpack_exports__["default"] = (todos);
+
+/***/ }),
+
+/***/ "./main.scss":
+/*!*******************!*\
+  !*** ./main.scss ***!
+  \*******************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-
+// extracted by mini-css-extract-plugin
 
 /***/ })
 
