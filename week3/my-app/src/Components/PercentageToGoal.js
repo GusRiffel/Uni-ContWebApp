@@ -11,9 +11,10 @@ const goalStyle = {
 const PercentageToGoal = (props) => {
     const {days} = props;
 
+    const progress = Math.round(100/30*days.length);
     return (
         <div>
-            <p style={percentageStyle}>{`${(100/30)*days}%`} TO</p>
+            <p style={percentageStyle}>{`${100 - progress}%`} TO</p>
             <p>GOAL</p>
         </div>
     )

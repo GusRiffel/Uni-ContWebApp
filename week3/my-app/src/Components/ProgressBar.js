@@ -20,9 +20,10 @@ const myBar = {
 const ProgressBar = (props) => {
     const {days} = props;
 
+    const progress = Math.round(100/30 * days.length);
     return (
         <div style={myProgress}>
-            <div style={{...myBar, width: `${(100/30)*days}%`}}></div>
+            <div style={{...myBar, width: `${progress}%`}}></div>
         </div>
         // <progress style={barColour} className="progress is-normal is-purple" value={days} max={30}></progress>
     )

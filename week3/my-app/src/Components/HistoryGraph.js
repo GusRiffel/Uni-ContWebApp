@@ -24,12 +24,16 @@ const myBar = {
     borderRadius: "5px"
 }
 
-const HistoryGraph = () => {
+const HistoryGraph = (props) => {
+    const {days} = props;
+    let daysReverse = Object.assign([], days);
+    const daysToDisplay = daysReverse.reverse();
+
     return (
         <div style={graphHolder}>
-            {graphProgress.map((p, key) =>
+            {daysToDisplay.slice(0,10).map((p, key) =>
                 <div style={myProgress} key={key}>
-                    <div style={{...myBar , height:`${(100 / 4) * p}%`}}></div>
+                    <div style={{...myBar , height:`${(100 / 20) * p.score}%`}}></div>
                 </div>
             )}
         </div>

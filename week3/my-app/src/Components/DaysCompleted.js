@@ -13,8 +13,8 @@ const DaysCompleted = (props) => {
     }
     return (
         <Tile>
-            <h1 style={divStyle}> {days} Days Completed!</h1>
-            <HistoryGraph />
+            <h1 style={divStyle}> {days.length} Days Completed!</h1>
+            <HistoryGraph days={days} />
             <ProgressBar days={days} />
             <PercentageToGoal days={days} />
         </Tile>
@@ -22,7 +22,7 @@ const DaysCompleted = (props) => {
 }
 
 DaysCompleted.propTypes = {
-    days: PropTypes.number.isRequired,
+    days: PropTypes.array.isRequired,
 };
 
 export default DaysCompleted;
