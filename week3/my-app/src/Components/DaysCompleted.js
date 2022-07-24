@@ -3,7 +3,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Tile from './Tile';
 import ProgressBar from './ProgressBar';
-import HistoryGraph from './HistoryGraph';
+import Histogram from './Histogram';
 import PercentageToGoal from './PercentageToGoal';
 
 const DaysCompleted = (props) => {
@@ -14,7 +14,7 @@ const DaysCompleted = (props) => {
     return (
         <Tile>
             <h1 style={divStyle}> {days.length} Days Completed!</h1>
-            <HistoryGraph days={days} />
+            <Histogram days={days} />
             <ProgressBar days={days} />
             <PercentageToGoal days={days} />
         </Tile>

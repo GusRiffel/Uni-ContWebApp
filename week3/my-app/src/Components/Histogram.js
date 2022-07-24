@@ -1,7 +1,5 @@
 import React from "react";
 
-const graphProgress = [1, 2, 3, 4, 2, 0, 1, 4, 2, 3];
-
 const graphHolder = {
     display: "flex",
     flexDirection: "row",
@@ -24,14 +22,14 @@ const myBar = {
     borderRadius: "5px"
 }
 
-const HistoryGraph = (props) => {
+const Histogram = (props) => {
     const {days} = props;
     let daysReverse = Object.assign([], days);
-    const daysToDisplay = daysReverse.reverse();
+    const daysToDisplay = daysReverse.slice(0,10).reverse();
 
     return (
         <div style={graphHolder}>
-            {daysToDisplay.slice(0,10).map((p, key) =>
+            {daysToDisplay.map((p, key) =>
                 <div style={myProgress} key={key}>
                     <div style={{...myBar , height:`${(100 / 20) * p.score}%`}}></div>
                 </div>
@@ -40,4 +38,4 @@ const HistoryGraph = (props) => {
     )
 }
 
-export default HistoryGraph;
+export default Histogram;
