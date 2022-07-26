@@ -29,7 +29,7 @@ function DaysCompleted(props) {
       <StyledRootDiv>
         <StyledDaysCompleteHeading> {days} Days Completed! </StyledDaysCompleteHeading>
         <Histogram barCount={7} bars={checkins.map(c => c.score * 5)} />
-        <ProgressBar percentage="50" />
+        <ProgressBar percentage={50} />
         <StyledGoalHeading>
           <strong>50%</strong> TO GOAL!
         </StyledGoalHeading>
@@ -40,7 +40,7 @@ function DaysCompleted(props) {
 
 DaysCompleted.propTypes = {
   days: PropTypes.number,
-  checkins: PropTypes.array.isRequired
+  checkins: PropTypes.array.isRequired,
 };
 
 DaysCompleted.defaultProps = {

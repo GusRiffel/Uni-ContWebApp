@@ -55,7 +55,7 @@ function Histogram(props) {
 
   return (
     <StyledHistogram>
-      {bars.map((b, i) => (i <= barCount ? <Bar percentage={b} /> : ""))}
+      {bars.map((b, i) => (i <= barCount ? <Bar percentage={b} key={i} /> : ""))}
     </StyledHistogram>
   );
 }
