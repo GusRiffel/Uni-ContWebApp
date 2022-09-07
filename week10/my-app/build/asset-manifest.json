@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.js": "/static/js/main.0b50f7e3.chunk.js",
+    "main.js.map": "/static/js/main.0b50f7e3.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.534a093a.js",
+    "runtime-main.js.map": "/static/js/runtime-main.534a093a.js.map",
+    "static/css/2.806af8bb.chunk.css": "/static/css/2.806af8bb.chunk.css",
+    "static/js/2.9f097473.chunk.js": "/static/js/2.9f097473.chunk.js",
+    "static/js/2.9f097473.chunk.js.map": "/static/js/2.9f097473.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.960fb6323882012e6a5095bf070f8a71.js": "/precache-manifest.960fb6323882012e6a5095bf070f8a71.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.806af8bb.chunk.css.map": "/static/css/2.806af8bb.chunk.css.map",
+    "static/js/2.9f097473.chunk.js.LICENSE.txt": "/static/js/2.9f097473.chunk.js.LICENSE.txt",
+    "static/js/main.0b50f7e3.chunk.js.LICENSE.txt": "/static/js/main.0b50f7e3.chunk.js.LICENSE.txt",
+    "static/media/avatar_large.png": "/static/media/avatar_large.0fce8ca8.png",
+    "static/media/drink-icon.svg": "/static/media/drink-icon.0f85a4cf.svg",
+    "static/media/food-icon.svg": "/static/media/food-icon.57c835ed.svg",
+    "static/media/notifications.css": "/static/media/notification.c0d3c94c.eot"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.534a093a.js",
+    "static/css/2.806af8bb.chunk.css",
+    "static/js/2.9f097473.chunk.js",
+    "static/js/main.0b50f7e3.chunk.js"
+  ]
+}
