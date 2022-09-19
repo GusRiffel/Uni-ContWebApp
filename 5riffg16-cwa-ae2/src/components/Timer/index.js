@@ -51,13 +51,37 @@ function Timer() {
   };
 
   return (
-    <div>
-      <button onClick={() => setTimeFormatted(25)}>Pomodoro</button>
-      <button onClick={() => setTime(5)}>Short Break</button>
-      <button onClick={() => setTime(15)}>Long Break</button>
-      <h1>{time}</h1>
-      <button onClick={() => setStart(true)}>Start</button>
-      <button onClick={() => setStart(false)}>Stop</button>
+    <div className="mt-10 mx-auto flex flex-col justify-between w-[42.5rem] h-[27.5rem] border-2 border-[#304D63] bg-white rounded">
+      <div className="flex pt-4 w-full justify-around">
+        <div className="text-lg text-white font-bold bg-[#436986] rounded">
+          <button className="px-3" onClick={() => setTimeFormatted(25)}>
+            Pomodoro
+          </button>
+        </div>
+        <div className="text-lg text-white font-bold bg-[#436986] rounded">
+          <button className="px-3" onClick={() => setTime(5)}>
+            Short Break
+          </button>
+        </div>
+        <div className="text-lg text-white font-bold bg-[#436986] rounded">
+          <button className="px-3" onClick={() => setTime(15)}>
+            Long Break
+          </button>
+        </div>
+      </div>
+
+      <div className="flex justify-center text-[10rem] text-[#304D63] font-bold">
+        <h1>{time}</h1>
+      </div>
+
+      <div className="flex pb-4 w-full justify-evenly">
+        <div className="w-36 text-lg text-center text-white font-bold bg-green-700 rounded">
+          <button onClick={() => setStart(true)}>Start</button>
+        </div>
+        <div className="w-36 text-center text-lg text-white font-bold bg-red-700 rounded">
+          <button onClick={() => setStart(false)}>Stop</button>
+        </div>
+      </div>
     </div>
   );
 }

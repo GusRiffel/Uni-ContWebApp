@@ -1,10 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
-import Timer from './components/Timer/Timer';
+import { Route, Routes } from "react-router-dom";
+
+import "./App.css";
+import Header from "./components/Header/index";
+import About from "./views/About";
+import Pomodoro from "./views/Pomodoro";
+import Login from "./views/Login";
 
 function App() {
   return (
-    <Timer />
+    <>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Pomodoro />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </>
   );
 }
 
