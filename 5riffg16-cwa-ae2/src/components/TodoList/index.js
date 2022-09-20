@@ -22,8 +22,6 @@ function TodoList() {
   const [isAddingTodo, setIsAddingTodo] = useState(false);
   const [todos, setTodos] = useState(todoList);
 
-  console.log(todos);
-
   function handleCreateTodo(event) {
     console.log(event);
     setTodos([...todos, { id: String(todos.length + 1), title: event }]);
