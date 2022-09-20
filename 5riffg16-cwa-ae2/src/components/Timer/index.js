@@ -52,6 +52,7 @@ function Timer() {
 
   return (
     <div className="mt-10 mx-auto flex flex-col justify-between w-[42.5rem] h-[27.5rem] border-2 border-[#304D63] bg-white rounded">
+
       <div className="flex pt-4 w-full justify-around">
         <div className="text-lg text-white font-bold bg-[#436986] rounded">
           <button className="px-3" onClick={() => setTimeFormatted(25)}>
@@ -74,7 +75,7 @@ function Timer() {
         <h1>{time}</h1>
       </div>
 
-      <div className="flex pb-4 w-full justify-evenly">
+      <div className="flex  pb-4 w-full justify-evenly">
         <div className="w-36 text-lg text-center text-white font-bold bg-green-700 rounded">
           <button onClick={() => setStart(true)}>Start</button>
         </div>

@@ -5,6 +5,7 @@ import Header from "./components/Header/index";
 import About from "./views/About";
 import Pomodoro from "./views/Pomodoro";
 import Login from "./views/Login";
+import Register from "./views/Register";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<Pomodoro />} />
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </>
   );
