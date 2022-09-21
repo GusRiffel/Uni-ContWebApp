@@ -1,65 +1,77 @@
-import { useState } from "react";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut,
-} from "firebase/auth";
+// import { useState, createContext } from "react";
+// import {
+//   getAuth,
+//   createUserWithEmailAndPassword,
+//   signInWithEmailAndPassword,
+//   onAuthStateChanged,
+//   signOut,
+// } from "firebase/auth";
+// import { useEffect } from "react";
+// import { initializeApp } from "firebase/app";
 
-function useAuth() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [user, setUser] = useState("");
-  const [authError, setAuthError] = useState("");
-  const auth = getAuth();
+// export const AuthContext = createContext();
 
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      setIsAuthenticated(true);
-      setUser(user.email);
-      return;
-    }
-    setIsAuthenticated(false);
-    setUser("");
-    return;
-  });
+// function useAuth() {
+//   const auth = getAuth();
+//   const [user, setUser] = useState("");
+//   const [authError, setAuthError] = useState("");
+//   const userr = auth.currentUser;
 
-  async function createEmailUser(email, password) {
-    let user;
-    await createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        user = userCredential.user;
-      })
-      .catch((error) => {
-        setAuthError(error.message);
-      });
-    return user;
-  }
 
-  async function signInWithEmailUser(email, password) {
-    let user;
-    await signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        user = userCredential.user;
-      })
-      .catch((error) => {
-        setAuthError(error.message);
-      });
-    return user;
-  }
+//   // useEffect(() => {
+//   //   const authState = onAuthStateChanged(auth, (user) => {
+//   //     if (user) {
+//   //       setUser(user);
+//   //     } else {
+//   //       setUser("");
+//   //     }
+//   //   });
+//   //   return authState;
+//   // }, []);
 
-  function signUserOut() {
-    signOut(auth);
-  }
+//   async function createEmailUser(email, password) {
+//     let user;
+//     await createUserWithEmailAndPassword(auth, email, password)
+//       .then((userCredential) => {
+//         user = userCredential.user;
+//       })
+//       .catch((error) => {
+//         setAuthError(error.message);
+//       });
+//     return user;
+//   }
 
-  return {
-    createEmailUser,
-    isAuthenticated,
-    user,
-    authError,
-    signInWithEmailUser,
-    signUserOut,
-  };
-}
+//   async function signInWithEmailUser(email, password) {
+//     let user;
+//     await signInWithEmailAndPassword(auth, email, password)
+//       .then((userCredential) => {
+//         user = userCredential.user;
+//       })
+//       .catch((error) => {
+//         setAuthError(error.message);
+//       });
+//     return user;
+//   }
 
-export default useAuth;
+//   function signUserOut() {
+//     signOut(auth);
+//   }
+
+//   function getContext() {
+//     return (
+//       <AuthContext.Provider value={{user}} />
+//     )
+//   }
+
+//   return {
+//     createEmailUser,
+//     user,
+//     authError,
+//     signInWithEmailUser,
+//     signUserOut,
+//     userr,
+//     getContext
+//   };
+// }
+
+// export default useAuth;

@@ -1,18 +1,16 @@
+import { useContext } from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import useAuth from "../../services/firebase/useAuth";
+import { AuthContext } from "../../services/firebase/auth";
 
 function RegisterForm() {
-  const { createEmailUser, authError } = useAuth();
+  // const { createEmailUser, authError } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+  const { createEmailUser, authError } = useContext(AuthContext);
 
   async function handleCreateUser(email, password) {
-    const user = await createEmailUser(email, password);
-    if (user) {
-      navigate("/");
-    }
+    await createEmailUser(email, password);
   }
   
   return (

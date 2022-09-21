@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import useCrud from "../../services/firebase/useCrud";
+import { AuthContext } from "../../services/firebase/auth";
+
 import CreateTodoItem from "../CreateTodoItem";
 
 import TodoItem from "../TodoItem";
+import { useContext } from "react";
 
 const todoList = [
   {
@@ -20,12 +24,30 @@ const todoList = [
 
 function TodoList() {
   const [isAddingTodo, setIsAddingTodo] = useState(false);
-  const [todos, setTodos] = useState(todoList);
+  const [todos, setTodos] = useState([]);
+  const { createTask, getObject, getObjectById } = useCrud();
+  // const {userr} = useAuth();
+  const { currentUser, pending } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (!pending && currentUser) {
+      getTodos();
+    }
+  }, [pending]);
+
+  async function getTodos() {
+    console.log(currentUser.uid);
+    console.log(pending);
+    const todos = await getObjectById(currentUser.uid, "tasks");
+    console.log(todos);
+    setTodos([...todos]);
+  }
 
   function handleCreateTodo(event) {
-    console.log(event);
-    setTodos([...todos, { id: String(todos.length + 1), title: event }]);
-    setIsAddingTodo(false);
+    createTask(event);
+    getTodos();
+    // setTodos([...todos, { id: String(todos.length + 1), title: event }]);
+    // setIsAddingTodo(false);
   }
 
   function removeTodo(todoId) {
@@ -57,7 +79,7 @@ function TodoList() {
         return (
           <TodoItem
             key={todo.id}
-            value={todo.title}
+            value={todo.task}
             todoId={todo.id}
             onRemove={removeTodo}
           />

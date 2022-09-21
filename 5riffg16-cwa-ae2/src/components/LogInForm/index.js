@@ -1,19 +1,18 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { SocialIcon } from "react-social-icons";
 import { Link, useNavigate } from "react-router-dom";
-import useAuth from "../../services/firebase/useAuth";
+import {AuthContext} from "../../services/firebase/auth"
 
 function LogInForm() {
-  const { signInWithEmailUser, authError } = useAuth();
+  //const { signInWithEmailUser, authError } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  //const user = useAuth();
+  const {  signInWithEmailUser, authError } = useContext(AuthContext);
 
   async function handleUserLogin(email, password) {
-    const user = await signInWithEmailUser(email, password);
-    if (user) {
-      navigate("/");
-    }
+    await signInWithEmailUser(email, password);
   }
 
   return (

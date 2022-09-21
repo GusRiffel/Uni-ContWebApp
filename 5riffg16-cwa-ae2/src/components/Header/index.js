@@ -1,8 +1,10 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
-import useAuth from "../../services/firebase/useAuth";
+import { AuthContext } from "../../services/firebase/auth";
 
 function Header() {
-  const { user, signUserOut } = useAuth();
+  // const { userr, signUserOut } = useAuth();
+  const {currentUser, signUserOut} = useContext(AuthContext);
 
   function handleSingUserOut() {
     signUserOut();
@@ -21,10 +23,10 @@ function Header() {
         </Link>
       </div>
 
-      {user ? (
+      {currentUser ? (
         <div className="flex">
           <div className="text-white font-semibold text-lg ">
-            <p>{`Welcome ${user}`}</p>
+            <p>{`Welcome ${currentUser.email}`}</p>
           </div>
           <div className="text-center text-lg text-white font-bold bg-[#436986] rounded">
             <button onClick={() => handleSingUserOut()}>Logout</button>

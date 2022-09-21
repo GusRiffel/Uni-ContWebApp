@@ -10,21 +10,23 @@ import Login from "./views/Login";
 import Register from "./views/Register";
 import useAuth from "./services/firebase/useAuth";
 import firebaseConfig from "./config/firabaseConfig";
+import { AuthProvider } from "./services/firebase/auth";
 
 function App() {
-  const app = initializeApp(firebaseConfig);
-  const {isAuthenticated, user} = useAuth();
-  console.log(user);
+  // const app = initializeApp(firebaseConfig);
+  // const { user } = useAuth();
 
   return (
     <>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Pomodoro />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-      </Routes>
+      <AuthProvider>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Pomodoro />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
+      </AuthProvider>
     </>
   );
 }
