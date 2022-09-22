@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../services/firebase/auth";
 
 function Header() {
-  // const { userr, signUserOut } = useAuth();
   const {currentUser, signUserOut} = useContext(AuthContext);
 
   function handleSingUserOut() {

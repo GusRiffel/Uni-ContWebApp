@@ -4,7 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../services/firebase/auth";
 
 function RegisterForm() {
-  // const { createEmailUser, authError } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { createEmailUser, authError } = useContext(AuthContext);

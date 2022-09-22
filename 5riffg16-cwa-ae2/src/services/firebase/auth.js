@@ -1,6 +1,5 @@
 import { useState, useEffect, createContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import app from "../../config/firabaseConfig";
+import { useNavigate } from "react-router-dom";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -11,22 +10,21 @@ import {
 
 export const AuthContext = createContext();
 
-
 export const AuthProvider = ({ children }) => {
   const auth = getAuth();
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState(null);
-  const [pending, setPending] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [authError, setAuthError] = useState("");
+  console.log(currentUser);
 
   useEffect(() => {
-    onAuthStateChanged(auth,(user) => {
-      setCurrentUser(user)
-      setPending(false)
-      if (user) {
-        navigate("/");
-      }
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setCurrentUser(user);
+      setLoading(false);
+      navigate("/");
     });
+    return unsubscribe;
   }, []);
 
   async function createEmailUser(email, password) {
@@ -57,10 +55,6 @@ export const AuthProvider = ({ children }) => {
     signOut(auth);
   }
 
-  if(pending){
-    return <>Loading...</>
-  }
-
   return (
     <AuthContext.Provider
       value={{
@@ -69,10 +63,9 @@ export const AuthProvider = ({ children }) => {
         authError,
         signInWithEmailUser,
         signUserOut,
-        pending
       }}
     >
-      {children}
+      {!loading && children}
     </AuthContext.Provider>
   );
 };

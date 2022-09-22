@@ -10,44 +10,39 @@ import { useContext } from "react";
 const todoList = [
   {
     id: "1",
-    title: "Webdev",
+    task: "Webdev",
   },
   {
     id: "2",
-    title: "Java",
-  },
-  {
-    id: "3",
-    title: "UX",
+    task: "CACHORRAO",
   },
 ];
 
 function TodoList() {
   const [isAddingTodo, setIsAddingTodo] = useState(false);
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(todoList);
   const { createTask, getObject, getObjectById } = useCrud();
-  // const {userr} = useAuth();
-  const { currentUser, pending } = useContext(AuthContext);
+  const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {
-    if (!pending && currentUser) {
-      getTodos();
-    }
-  }, [pending]);
+    getTodos();
+  }, [currentUser]);
 
   async function getTodos() {
-    console.log(currentUser.uid);
-    console.log(pending);
-    const todos = await getObjectById(currentUser.uid, "tasks");
-    console.log(todos);
-    setTodos([...todos]);
+    if (currentUser) {
+      const todos = await getObjectById(currentUser.uid, "tasks");
+      setTodos([...todos]);}
   }
 
   function handleCreateTodo(event) {
-    createTask(event);
+    if (currentUser) {
+      createTask(event);
+    } else {
+      console.log(event.task);
+      setTodos([...todos, { id: String(todoList.length + 1), task: event.task }]);
+      console.log(todos);
+    }
     getTodos();
-    // setTodos([...todos, { id: String(todos.length + 1), title: event }]);
-    // setIsAddingTodo(false);
   }
 
   function removeTodo(todoId) {

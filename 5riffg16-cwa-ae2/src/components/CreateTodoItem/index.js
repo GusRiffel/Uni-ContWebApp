@@ -3,11 +3,10 @@ import { AuthContext } from "../../services/firebase/auth";
 
 function CreateTodoItem(props) {
   const [task, setTask] = useState("");
-  // const {user} = useAuth();
   const { currentUser } = useContext(AuthContext);
 
   function formatTodoToSubmit() {
-    return { uid: currentUser.uid, task };
+    return { uid: currentUser ? currentUser.uid : "", task };
   }
 
   return (
