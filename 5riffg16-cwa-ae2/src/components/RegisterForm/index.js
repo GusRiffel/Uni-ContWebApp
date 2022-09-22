@@ -1,17 +1,23 @@
 import { useContext } from "react";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../services/firebase/auth";
 
 function RegisterForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { createEmailUser, authError } = useContext(AuthContext);
+  const [error, setError] = useState("");
+  const { createUser } = useContext(AuthContext);
 
   async function handleCreateUser(email, password) {
-    await createEmailUser(email, password);
+    try {
+      await createUser(email, password);
+    } catch (error) {
+      console.log(error.message);
+      setError(error.message);
+    }
   }
-  
+
   return (
     <div className="mt-6 h-9 text-lg rounded">
       <form
@@ -46,7 +52,7 @@ function RegisterForm() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        {authError && <p className="text-red-500 font-semibold">{authError}</p>}
+        {error && <p className="text-red-500 font-semibold">{error}</p>}
         <div className="mt-5">
           <div className="">
             <button

@@ -1,15 +1,21 @@
 import { useContext, useState } from "react";
 import { SocialIcon } from "react-social-icons";
 import { Link, useNavigate } from "react-router-dom";
-import {AuthContext} from "../../services/firebase/auth"
+import { AuthContext } from "../../services/firebase/auth";
 
 function LogInForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const {  signInWithEmailUser, authError } = useContext(AuthContext);
+  const [error, setError] = useState("");
+  const { signIn } = useContext(AuthContext);
 
   async function handleUserLogin(email, password) {
-    await signInWithEmailUser(email, password);
+    try {
+      await signIn(email, password);
+    } catch (error) {
+      console.log(error.message);
+      setError(error.message)
+    }
   }
 
   return (
@@ -46,7 +52,7 @@ function LogInForm() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        {authError && <p className="text-red-500 font-semibold">{authError}</p>}
+        {error && <p className="text-red-500 font-semibold">{error}</p>}
 
         <div className="mt-3">
           <div className="">

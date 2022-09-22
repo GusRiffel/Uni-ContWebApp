@@ -7,46 +7,58 @@ import CreateTodoItem from "../CreateTodoItem";
 import TodoItem from "../TodoItem";
 import { useContext } from "react";
 
-const todoList = [
-  {
-    id: "1",
-    task: "Webdev",
-  },
-  {
-    id: "2",
-    task: "CACHORRAO",
-  },
-];
+let todoList = [];
 
 function TodoList() {
   const [isAddingTodo, setIsAddingTodo] = useState(false);
-  const [todos, setTodos] = useState(todoList);
-  const { createTask, getObject, getObjectById } = useCrud();
+  const [todo, setTodo] = useState([]);
+  const [error, setError] = useState("");
+  const { createTask, getTaskById, deleteTask } = useCrud();
   const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {
-    getTodos();
+    getTodo();
   }, [currentUser]);
 
-  async function getTodos() {
+  async function getTodo() {
     if (currentUser) {
-      const todos = await getObjectById(currentUser.uid, "tasks");
-      setTodos([...todos]);}
-  }
-
-  function handleCreateTodo(event) {
-    if (currentUser) {
-      createTask(event);
+      try {
+        const todo = await getTaskById(currentUser.uid);
+        setTodo([...todo]);
+      } catch (error) {
+        setError("Error listing document: ", error);
+      }
     } else {
-      console.log(event.task);
-      setTodos([...todos, { id: String(todoList.length + 1), task: event.task }]);
-      console.log(todos);
+      setTodo([...todoList]);
     }
-    getTodos();
   }
 
-  function removeTodo(todoId) {
-    setTodos(todos.filter((todo) => todo.id !== todoId));
+  async function handleCreateTodo(event) {
+    if (currentUser) {
+      try {
+        await createTask(event);
+        getTodo();
+      } catch (error) {
+        setError("Error adding document: ", error);
+      }
+    } else {
+      todoList.push({ id: String(todo.length + 1), task: event.task });
+      setTodo([...todo, { id: String(todo.length + 1), task: event.task }]);
+    }
+  }
+
+  async function removeTodo(todoId) {
+    if (currentUser) {
+      try {
+        await deleteTask(todoId);
+        getTodo();
+      } catch (error) {
+        setError("Error deleting document: ", error);
+      }
+    } else {
+      todoList = todoList.filter((todo) => todo.id !== todoId);
+      setTodo(todo.filter((todo) => todo.id !== todoId));
+    }
   }
 
   function handleCancelTodo() {
@@ -70,7 +82,7 @@ function TodoList() {
         )}
       </div>
 
-      {todos.map((todo) => {
+      {todo.map((todo) => {
         return (
           <TodoItem
             key={todo.id}
