@@ -82,17 +82,18 @@ function TodoList() {
           </div>
         )}
       </div>
-
-      {todo.map((todo) => {
-        return (
-          <TodoItem
-            key={todo.id}
-            value={todo.task}
-            todoId={todo.id}
-            onRemove={removeTodo}
-          />
-        );
-      })}
+      <div>
+        {todo.map((todo) => {
+          return (
+            <TodoItem
+              key={todo.id}
+              value={todo.task}
+              todoId={todo.id}
+              onRemove={removeTodo}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }

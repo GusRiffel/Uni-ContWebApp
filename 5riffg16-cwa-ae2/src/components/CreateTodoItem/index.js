@@ -1,30 +1,40 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../../services/firebase/auth";
+import { useForm } from "react-hook-form";
+
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+const schema = yup.object().shape({
+  task: yup.string().required("You must enter a task"),
+});
 
 function CreateTodoItem(props) {
-  const [task, setTask] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schema) });
   const { currentUser } = useContext(AuthContext);
 
-  function formatTodoToSubmit() {
-    return { uid: currentUser ? currentUser.uid : "", task };
+  function formatTodoToSubmit(data) {
+    return { uid: currentUser ? currentUser.uid : "", task: data.task };
   }
 
   return (
     <div className="mt-1 h-9 text-lg rounded">
       <form
-        onSubmit={(event) => {
-          event.preventDefault();
-          props.onSubmit(formatTodoToSubmit());
-        }}
+        onSubmit={handleSubmit((data) =>
+          props.onSubmit(formatTodoToSubmit(data))
+        )}
       >
         <label htmlFor="todoTask" />
         <input
+          {...register("task")}
           className="rounded text-center h-9"
           size={35}
           placeholder="Task Name"
           type="text"
-          value={task}
-          onChange={(e) => setTask(e.target.value)}
         />
 
         <button
@@ -40,6 +50,9 @@ function CreateTodoItem(props) {
         >
           Cancel
         </button>
+        <div className="float-left ml-[25%]">
+          <p className="text-red-500 font-semibold">{errors.task?.message}</p>
+        </div>
       </form>
     </div>
   );
