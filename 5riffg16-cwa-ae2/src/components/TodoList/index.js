@@ -45,6 +45,7 @@ function TodoList() {
       todoList.push({ id: String(todo.length + 1), task: event.task });
       setTodo([...todo, { id: String(todo.length + 1), task: event.task }]);
     }
+    setIsAddingTodo(false);
   }
 
   async function removeTodo(todoId) {

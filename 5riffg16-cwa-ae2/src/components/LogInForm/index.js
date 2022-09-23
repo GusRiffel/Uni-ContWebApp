@@ -1,20 +1,40 @@
 import { useContext, useState } from "react";
+import { useForm } from "react-hook-form";
 import { SocialIcon } from "react-social-icons";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
 import { AuthContext } from "../../services/firebase/auth";
 
+const schema = yup.object().shape({
+  email: yup
+    .string()
+    .email("Email is not valid")
+    .required("You must enter an email"),
+  password: yup
+    .string()
+    .required("Password is required")
+    .min(6, "Password must have minimum 6 characters"),
+});
+
 function LogInForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schema) });
   const [error, setError] = useState("");
   const { signIn } = useContext(AuthContext);
 
-  async function handleUserLogin(email, password) {
+  async function handleUserLogin(data) {
     try {
-      await signIn(email, password);
+      await signIn(data.email, data.password);
     } catch (error) {
       console.log(error.message);
-      setError(error.message)
+      setError(error.message);
     }
   }
 
@@ -22,36 +42,33 @@ function LogInForm() {
     <div className="mt-1 h-9 text-lg rounded">
       <form
         className="flex flex-col w-96 mx-auto"
-        onSubmit={(event) => {
-          event.preventDefault();
-          handleUserLogin(email, password);
-        }}
+        onSubmit={handleSubmit((data) => handleUserLogin(data))}
       >
         <label className="mt-3" htmlFor="email">
           E-mail
         </label>
         <input
+          {...register("email", { required: true })}
           className="rounded text-center h-9 border-2 border-black mt-1"
           name="email"
           size={35}
           placeholder="Type your e-mail"
           type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
         />
+        <p className="text-red-500 font-semibold">{errors.email?.message}</p>
 
         <label className="mt-3" htmlFor="password">
           Password
         </label>
         <input
+          {...register("password", { required: true, minLength: 6 })}
           className="rounded text-center h-9 border-2 border-black mt-1"
           name="password"
           size={35}
           placeholder="Type your password"
           type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
         />
+        <p className="text-red-500 font-semibold">{errors.password?.message}</p>
         {error && <p className="text-red-500 font-semibold">{error}</p>}
 
         <div className="mt-3">
