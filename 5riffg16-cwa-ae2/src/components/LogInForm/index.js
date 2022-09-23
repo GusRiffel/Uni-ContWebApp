@@ -23,7 +23,6 @@ function LogInForm() {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
   const [error, setError] = useState("");
