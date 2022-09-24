@@ -1,4 +1,11 @@
 import { useState, useEffect } from "react";
+import alarm from "../../assets/16900_1461333025.mp3";
+import {Howl, Howler} from 'howler';
+
+const sound = new Howl({
+  src: alarm
+});
+
 
 function convertSecondsToMinutes(secondsTotal) {
   const minutes = Math.floor(secondsTotal / 60);
@@ -13,6 +20,10 @@ function Timer() {
   const [hasStarted, setHasStart] = useState(false);
 
   useEffect(() => {
+    if (timeInSeconds === 0) {
+      sound.play()
+      return
+    }
     if (hasStarted) {
       const interval = setInterval(() => {
         setTimeInSeconds(timeInSeconds - 1);
@@ -21,16 +32,18 @@ function Timer() {
     }
   }, [timeInSeconds, hasStarted]);
 
+
   function handleTimeOption(time) {
     setTimeInSeconds(time * 60);
     setHasStart(false);
+    
   }
 
   return (
     <div className="mt-10 mx-auto flex flex-col justify-between w-[42.5rem] h-[27.5rem] border-2 border-[#304D63] bg-white rounded">
       <div className="flex pt-4 w-full justify-around">
         <div className="text-lg text-white font-bold bg-[#436986] rounded">
-          <button className="px-3" onClick={() => handleTimeOption(0.5)}>
+          <button className="px-3" onClick={() => handleTimeOption(0.05)}>
             Pomodoro
           </button>
         </div>
