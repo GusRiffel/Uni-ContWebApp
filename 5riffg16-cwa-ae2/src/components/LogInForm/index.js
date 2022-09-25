@@ -26,7 +26,8 @@ function LogInForm() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
   const [error, setError] = useState("");
-  const { signIn } = useContext(AuthContext);
+  const { signIn, signInGoogleUser, signInFacebookUser } =
+    useContext(AuthContext);
 
   async function handleUserLogin(data) {
     try {
@@ -34,6 +35,14 @@ function LogInForm() {
     } catch (error) {
       console.log(error.message);
       setError(error.message);
+    }
+  }
+
+  async function handleSocialLogin(data) {
+    if (data === "google") {
+      await signInGoogleUser();
+    } else if (data === "facebook") {
+      await signInFacebookUser();
     }
   }
 
@@ -84,11 +93,15 @@ function LogInForm() {
               <SocialIcon
                 network="google"
                 style={{ cursor: "pointer" }}
-                onClick={() => {}}
+                onClick={() => handleSocialLogin("google")}
               />
             </div>
             <div>
-              <SocialIcon network="facebook" style={{ cursor: "pointer" }} />
+              <SocialIcon
+                network="facebook"
+                style={{ cursor: "pointer" }}
+                onClick={() => handleSocialLogin("facebook")}
+              />
             </div>
           </div>
           <div className="mt-2 text-xl text-bold">

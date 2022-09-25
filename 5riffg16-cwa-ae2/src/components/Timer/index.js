@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import alarm from "../../assets/16900_1461333025.mp3";
-import {Howl, Howler} from 'howler';
+import {Howl} from 'howler';
 
 const sound = new Howl({
   src: alarm

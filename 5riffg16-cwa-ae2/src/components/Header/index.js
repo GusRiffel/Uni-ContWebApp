@@ -25,7 +25,7 @@ function Header() {
       {currentUser ? (
         <div className="flex">
           <div className="text-white font-semibold text-lg ">
-            <p>{`Welcome ${currentUser.email}`}</p>
+            <p>{`Welcome ${currentUser.displayName}`}</p>
           </div>
           <div className="text-center text-lg text-white font-bold bg-[#436986] rounded">
             <button onClick={() => handleSingUserOut()}>Logout</button>

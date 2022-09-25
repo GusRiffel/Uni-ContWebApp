@@ -9,6 +9,10 @@ import * as yup from "yup";
 import { AuthContext } from "../../services/firebase/auth";
 
 const schema = yup.object().shape({
+  userName: yup
+    .string()
+    .required("You must enter an User name")
+    .max(8, "User name must have maximum of 8 characters"),
   email: yup
     .string()
     .email("Email is not valid")
@@ -19,7 +23,6 @@ const schema = yup.object().shape({
     .min(6, "Password must have minimum 6 characters"),
 });
 
-
 function RegisterForm() {
   const {
     register,
@@ -27,11 +30,12 @@ function RegisterForm() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
   const [error, setError] = useState("");
-  const { createUser } = useContext(AuthContext);
+  const { createUser, setUserName } = useContext(AuthContext);
 
   async function handleCreateUser(data) {
     try {
-      await createUser(data.email, data.password);
+      const {user} = await createUser(data.email, data.password);
+      await setUserName(user, data.userName);
     } catch (error) {
       console.log(error.message);
       setError(error.message);
@@ -44,11 +48,21 @@ function RegisterForm() {
         className="flex flex-col w-96 mx-auto"
         onSubmit={handleSubmit((data) => handleCreateUser(data))}
       >
-        <label className="mt-3" htmlFor="email">
+        <label htmlFor="userName">User name</label>
+        <input
+          {...register("userName", { required: true })}
+          className="rounded text-center h-9 border-2 border-black mt-1"
+          name="userName"
+          size={35}
+          placeholder="Type your user name"
+          type="userName"
+        />
+        <p className="text-red-500 font-semibold">{errors.userName?.message}</p>
+        <label className="mt-1" htmlFor="email">
           E-mail
         </label>
         <input
-        {...register("email", { required: true })}
+          {...register("email", { required: true })}
           className="rounded text-center h-9 border-2 border-black mt-1"
           name="email"
           size={35}
@@ -57,11 +71,11 @@ function RegisterForm() {
         />
         <p className="text-red-500 font-semibold">{errors.email?.message}</p>
 
-        <label className="mt-3" htmlFor="password">
+        <label className="mt-1" htmlFor="password">
           Password
         </label>
         <input
-        {...register("password", { required: true })}
+          {...register("password", { required: true })}
           className="rounded text-center h-9 border-2 border-black mt-1"
           name="password"
           size={35}
@@ -70,7 +84,7 @@ function RegisterForm() {
         />
         <p className="text-red-500 font-semibold">{errors.password?.message}</p>
         {error && <p className="text-red-500 font-semibold">{error}</p>}
-        <div className="mt-5">
+        <div className="mt-2">
           <div className="">
             <button
               className="text-lg px-1 h-8 w-44 text-center text-white font-bold bg-blue-400 rounded"
@@ -79,7 +93,7 @@ function RegisterForm() {
               Create Account
             </button>
           </div>
-          <div className="mt-6 text-xl text-bold">
+          <div className="mt-2 text-xl text-bold">
             <Link to="/login">Registered Already? Login now!</Link>
           </div>
         </div>
