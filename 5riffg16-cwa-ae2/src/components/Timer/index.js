@@ -1,11 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { AuthContext } from "../../services/firebase/auth";
+import useCrud from "../../services/firebase/useCrud";
 import alarm from "../../assets/16900_1461333025.mp3";
-import {Howl} from 'howler';
+import { Howl } from "howler";
 
 const sound = new Howl({
-  src: alarm
+  src: alarm,
 });
-
 
 function convertSecondsToMinutes(secondsTotal) {
   const minutes = Math.floor(secondsTotal / 60);
@@ -18,11 +19,16 @@ function convertSecondsToMinutes(secondsTotal) {
 function Timer() {
   const [timeInSeconds, setTimeInSeconds] = useState(1200);
   const [hasStarted, setHasStart] = useState(false);
+  const [isPomodoro, setIsPomodoro] = useState(false);
+  const { createPomodoroDetails } = useCrud();
+  const { currentUser } = useContext(AuthContext);
+  const [pomodoroTime, setPomodoroTime] = useState();
 
   useEffect(() => {
     if (timeInSeconds === 0) {
-      sound.play()
-      return
+      sound.play();
+      handleSavePomodoroDetails();
+      return;
     }
     if (hasStarted) {
       const interval = setInterval(() => {
@@ -32,28 +38,40 @@ function Timer() {
     }
   }, [timeInSeconds, hasStarted]);
 
+  async function handleSavePomodoroDetails() {
+    if (currentUser && isPomodoro) {
+      await createPomodoroDetails({ uid: currentUser.uid, time: pomodoroTime });
+    }
+  }
 
-  function handleTimeOption(time) {
+  function handlePomoroTime(time) {
+    setPomodoroTime(time);
+    setIsPomodoro(true);
     setTimeInSeconds(time * 60);
     setHasStart(false);
-    
+  }
+
+  function handleBreakTime(time) {
+    setTimeInSeconds(time * 60);
+    setIsPomodoro(false);
+    setHasStart(false);
   }
 
   return (
     <div className="mt-10 mx-auto flex flex-col justify-between w-[42.5rem] h-[27.5rem] border-2 border-[#304D63] bg-white rounded">
       <div className="flex pt-4 w-full justify-around">
         <div className="text-lg text-white font-bold bg-[#436986] rounded">
-          <button className="px-3" onClick={() => handleTimeOption(0.05)}>
+          <button className="px-3" onClick={() => handlePomoroTime(0.05)}>
             Pomodoro
           </button>
         </div>
         <div className="text-lg text-white font-bold bg-[#436986] rounded">
-          <button className="px-3" onClick={() => handleTimeOption(5)}>
+          <button className="px-3" onClick={() => handleBreakTime(5)}>
             Short Break
           </button>
         </div>
         <div className="text-lg text-white font-bold bg-[#436986] rounded">
-          <button className="px-3" onClick={() => handleTimeOption(15)}>
+          <button className="px-3" onClick={() => handleBreakTime(15)}>
             Long Break
           </button>
         </div>

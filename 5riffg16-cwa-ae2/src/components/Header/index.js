@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../services/firebase/auth";
 
 function Header() {
-  const {currentUser, signUserOut} = useContext(AuthContext);
+  const { currentUser, signUserOut } = useContext(AuthContext);
 
   function handleSingUserOut() {
     signUserOut();
@@ -24,6 +24,9 @@ function Header() {
 
       {currentUser ? (
         <div className="flex">
+          <div className="text-center text-lg text-white font-bold bg-[#436986] rounded">
+          <Link to="/dashboard" className="p-3">DashBoard</Link>
+          </div>
           <div className="text-white font-semibold text-lg ">
             <p>{`Welcome ${currentUser.displayName}`}</p>
           </div>

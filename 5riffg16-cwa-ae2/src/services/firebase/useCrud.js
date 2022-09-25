@@ -13,12 +13,20 @@ function useCrud() {
     return create(data, "tasks");
   }
 
+  function createPomodoroDetails(data) {
+    return create(data, "pomodoro")
+  }
+
   function deleteTask(itemId) {
     return remove(itemId, "tasks");
   }
 
   function getTask() {
     return get("tasks");
+  }
+
+  function getPomodoroByUserId(userId) {
+    return getByUserId(userId, "pomodoro")
   }
 
   function getTaskById(userId) {
@@ -71,7 +79,7 @@ function useCrud() {
     return data;
   }
 
-  return { createTask, getTask, getTaskById, deleteTask };
+  return { createTask, createPomodoroDetails, getTask, getTaskById, getPomodoroByUserId, deleteTask };
 }
 
 export default useCrud;
