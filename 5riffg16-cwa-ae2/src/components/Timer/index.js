@@ -1,7 +1,9 @@
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../../services/firebase/auth";
+
 import useCrud from "../../services/firebase/useCrud";
 import alarm from "../../assets/16900_1461333025.mp3";
+import SetTimeModal from "../SetTimeModal";
 import { Howl } from "howler";
 
 const sound = new Howl({
@@ -17,9 +19,9 @@ function convertSecondsToMinutes(secondsTotal) {
 }
 
 function Timer() {
-  const [timeInSeconds, setTimeInSeconds] = useState(1200);
+  const [timeInSeconds, setTimeInSeconds] = useState(1500);
   const [hasStarted, setHasStart] = useState(false);
-  const [isPomodoro, setIsPomodoro] = useState(false);
+  const [isPomodoro, setIsPomodoro] = useState(true);
   const { createPomodoroDetails } = useCrud();
   const { currentUser } = useContext(AuthContext);
   const [pomodoroTime, setPomodoroTime] = useState();
@@ -57,11 +59,15 @@ function Timer() {
     setHasStart(false);
   }
 
+  function handleSetPomodoroTime(data) {
+    setTimeInSeconds(data.time * 60);
+  }
+
   return (
     <div className="mt-10 mx-auto flex flex-col justify-between w-[42.5rem] h-[27.5rem] border-2 border-[#304D63] bg-white rounded">
       <div className="flex pt-4 w-full justify-around">
         <div className="text-lg text-white font-bold bg-[#436986] rounded">
-          <button className="px-3" onClick={() => handlePomoroTime(0.05)}>
+          <button className="px-3" onClick={() => handlePomoroTime(25)}>
             Pomodoro
           </button>
         </div>
@@ -84,6 +90,9 @@ function Timer() {
       <div className="flex  pb-4 w-full justify-evenly">
         <div className="w-36 text-lg text-center text-white font-bold bg-green-700 rounded">
           <button onClick={() => setHasStart(true)}>Start</button>
+        </div>
+        <div>
+          {<SetTimeModal isPomodoro={isPomodoro} onSubmit={handleSetPomodoroTime} />}
         </div>
         <div className="w-36 text-center text-lg text-white font-bold bg-red-700 rounded">
           <button onClick={() => setHasStart(false)}>Stop</button>

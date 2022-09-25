@@ -11,19 +11,22 @@ function Header() {
 
   return (
     <div className="w-full flex justify-around items-center mx-auto py-8 bg-[#304D63]">
-      <div className="w-48 text-center text-lg text-white font-bold bg-[#436986] rounded">
+
+      <div className="w-[22rem] text-center text-lg text-white font-bold bg-[#436986] rounded">
         <Link to="about" className="p-3">
           What Is Pomodoro?
         </Link>
       </div>
-      <div className="w-48 text-center text-lg text-white font-bold bg-[#436986] rounded">
+
+      <div className="w-[22rem] text-center text-lg text-white font-bold bg-[#436986] rounded">
         <Link to="/" className="p-3">
           It's Time to Focus
         </Link>
       </div>
 
+      
       {currentUser ? (
-        <div className="flex">
+        <div className="flex w-[22rem] justify-between">
           <div className="text-center text-lg text-white font-bold bg-[#436986] rounded">
           <Link to="/dashboard" className="p-3">DashBoard</Link>
           </div>
@@ -31,11 +34,11 @@ function Header() {
             <p>{`Welcome ${currentUser.displayName}`}</p>
           </div>
           <div className="text-center text-lg text-white font-bold bg-[#436986] rounded">
-            <button onClick={() => handleSingUserOut()}>Logout</button>
+            <button className="px-3" onClick={() => handleSingUserOut()}>Logout</button>
           </div>
         </div>
       ) : (
-        <div className="w-48 text-center text-lg text-white font-bold bg-[#436986] rounded">
+        <div className="w-[22rem] text-center text-lg text-white font-bold bg-[#436986] rounded">
           <Link to="/login" className="p-3">
             Login
           </Link>
