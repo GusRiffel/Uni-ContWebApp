@@ -30,14 +30,17 @@ function RegisterForm() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
   const [error, setError] = useState("");
-  const { createUser, setUserName } = useContext(AuthContext);
+  const { createUser, setUserName, signUserOut } = useContext(AuthContext);
   const navigate = useNavigate();
+  
 
   async function handleCreateUser(data) {
     try {
-      const {user} = await createUser(data.email, data.password);
+      const { user } = await createUser(data.email, data.password);
       await setUserName(user, data.userName);
-      navigate("/");
+      if (user.displayName) {
+        navigate("/");
+      }
     } catch (error) {
       console.log(error.message);
       setError(error.message);

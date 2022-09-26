@@ -1,11 +1,13 @@
-import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../services/firebase/auth";
 
 function Header() {
   const { currentUser, signUserOut } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   function handleSingUserOut() {
+    navigate("/");
     signUserOut();
   }
 
@@ -32,7 +34,9 @@ function Header() {
               </Link>
             </div>
             <div className="text-white font-semibold text-lg ">
-              <p>{currentUser.displayName && `Welcome ${currentUser.displayName}`}</p>
+              <p>
+                {currentUser.displayName && `Welcome ${currentUser.displayName}`}
+              </p>
             </div>
             <div className="text-center text-lg text-white font-bold bg-[#436986] hover:bg-[#5d84a1]  rounded">
               <button

@@ -33,7 +33,7 @@ function LogInForm() {
   async function handleUserLogin(data) {
     try {
       await signIn(data.email, data.password);
-      navigate("/")
+      navigate("/");
     } catch (error) {
       console.log(error.message);
       setError(error.message);
