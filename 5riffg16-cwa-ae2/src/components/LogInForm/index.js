@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { SocialIcon } from "react-social-icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -28,10 +28,12 @@ function LogInForm() {
   const [error, setError] = useState("");
   const { signIn, signInGoogleUser, signInFacebookUser } =
     useContext(AuthContext);
+  const navigate = useNavigate();
 
   async function handleUserLogin(data) {
     try {
       await signIn(data.email, data.password);
+      navigate("/")
     } catch (error) {
       console.log(error.message);
       setError(error.message);
@@ -57,7 +59,7 @@ function LogInForm() {
         </label>
         <input
           {...register("email", { required: true })}
-          className="rounded text-center h-9 border-2 border-black mt-1"
+          className="rounded text-center h-9 border-2  hover:bg-blue-100 border-black mt-1"
           name="email"
           size={35}
           placeholder="Type your e-mail"
@@ -70,7 +72,7 @@ function LogInForm() {
         </label>
         <input
           {...register("password", { required: true, minLength: 6 })}
-          className="rounded text-center h-9 border-2 border-black mt-1"
+          className="rounded text-center h-9 border-2  hover:bg-blue-100 border-black mt-1"
           name="password"
           size={35}
           placeholder="Type your password"
@@ -82,7 +84,7 @@ function LogInForm() {
         <div className="mt-3">
           <div className="">
             <button
-              className="text-lg px-1 h-8 w-44 text-center text-white font-bold bg-blue-400 rounded"
+              className="text-lg px-1 h-8 w-44 text-center text-white font-bold bg-blue-400 hover:bg-blue-300 rounded"
               type="submit"
             >
               Login
@@ -92,6 +94,7 @@ function LogInForm() {
             <div>
               <SocialIcon
                 network="google"
+                className="hover:bg-blue-100 rounded"
                 style={{ cursor: "pointer" }}
                 onClick={() => handleSocialLogin("google")}
               />
@@ -99,12 +102,13 @@ function LogInForm() {
             <div>
               <SocialIcon
                 network="facebook"
+                className="hover:bg-blue-100 rounded"
                 style={{ cursor: "pointer" }}
                 onClick={() => handleSocialLogin("facebook")}
               />
             </div>
           </div>
-          <div className="mt-2 text-xl text-bold">
+          <div className="mt-2 text-xl font-bold hover:font-semibold">
             <Link to="/register">Don't have an Account? Register now!</Link>
           </div>
         </div>

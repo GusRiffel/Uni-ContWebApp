@@ -7,6 +7,7 @@ import CreateTodoItem from "../CreateTodoItem";
 import TodoItem from "../TodoItem";
 import { useContext } from "react";
 
+
 let todoList = [];
 
 function TodoList() {
@@ -69,7 +70,7 @@ function TodoList() {
   return (
     <div className="mt-5 flex flex-col items-center">
       <div className="w-[30rem] text-center ">
-        <div className="text-5xl">To do List</div>
+        <div className="text-5xl text-[#304D63]">To do List</div>
 
         {isAddingTodo ? (
           <CreateTodoItem
@@ -77,8 +78,8 @@ function TodoList() {
             onCancel={handleCancelTodo}
           />
         ) : (
-          <div className="mt-3 h-8 text-lg text-white font-bold bg-[#99bbd6] rounded">
-            <button onClick={() => setIsAddingTodo(true)}>Add new task</button>
+          <div className="mt-3 h-8 text-lg text-white font-bold bg-[#304D63] hover:bg-[#6b8eaa] rounded">
+            <button className="w-full inline-block" onClick={() => setIsAddingTodo(true)}>Add new task</button>
           </div>
         )}
       </div>

@@ -1,5 +1,4 @@
 import { useState, useEffect, createContext } from "react";
-import { useNavigate } from "react-router-dom";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -12,6 +11,7 @@ import {
   FacebookAuthProvider,
 } from "firebase/auth";
 
+
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -22,13 +22,11 @@ export const AuthProvider = ({ children }) => {
 
   const auth = getAuth();
 
-  const navigate = useNavigate();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
       setLoading(false);
-      navigate("/");
     });
     return unsubscribe;
   }, []);

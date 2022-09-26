@@ -31,21 +31,21 @@ function CreateTodoItem(props) {
         <label htmlFor="todoTask" />
         <input
           {...register("task")}
-          className="rounded text-center h-9"
+          className="rounded text-center h-9 hover:bg-blue-100"
           size={35}
           placeholder="Task Name"
           type="text"
         />
 
         <button
-          className="text-lg mx-2 px-1 h-9 text-center text-white font-bold bg-green-500 rounded"
+          className="text-lg mx-2 px-1 h-9 text-center text-white font-bold bg-green-500 hover:bg-green-400 rounded"
           type="submit"
         >
           Create
         </button>
 
         <button
-          className="text-lg px-1 text-center h-9 text-white font-bold bg-red-500 rounded"
+          className="text-lg px-1 text-center h-9 text-white font-bold bg-red-500 hover:bg-red-400 rounded"
           onClick={() => props.onCancel()}
         >
           Cancel

@@ -62,7 +62,7 @@ function SetTimeModal(props) {
                       </label>
                       <input
                         {...register("time", { required: true })}
-                        className="shadow appearance-none border rounded w-full py-2 px-1 text-black"
+                        className="shadow appearance-none border rounded w-full hover:bg-blue-100 py-2 px-1 text-black"
                         name="time"
                         placeholder="Set your new time"
                       />
@@ -72,7 +72,7 @@ function SetTimeModal(props) {
                     </p>
                     <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
                       <button
-                        className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
+                        className="text-red-500 bg-transparent  hover:bg-red-100 rounded font-bold uppercase px-6 py-3 text-sm outline-none focus:outline-none mr-1 mb-1"
                         type="button"
                         onClick={() => {
                           setShowModal(false);
@@ -82,7 +82,7 @@ function SetTimeModal(props) {
                         Close
                       </button>
                       <button
-                        className="text-white bg-green-700 active:bg-yellow-700 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
+                        className="text-white bg-green-700  hover:bg-green-500 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
                         type="submit"
                       >
                         Submit

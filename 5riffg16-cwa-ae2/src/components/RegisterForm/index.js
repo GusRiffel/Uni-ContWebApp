@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -31,11 +31,13 @@ function RegisterForm() {
   } = useForm({ resolver: yupResolver(schema) });
   const [error, setError] = useState("");
   const { createUser, setUserName } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   async function handleCreateUser(data) {
     try {
       const {user} = await createUser(data.email, data.password);
       await setUserName(user, data.userName);
+      navigate("/");
     } catch (error) {
       console.log(error.message);
       setError(error.message);
@@ -51,7 +53,7 @@ function RegisterForm() {
         <label htmlFor="userName">User name</label>
         <input
           {...register("userName", { required: true })}
-          className="rounded text-center h-9 border-2 border-black mt-1"
+          className="rounded text-center h-9 border-2  hover:bg-blue-100 border-black mt-1"
           name="userName"
           size={35}
           placeholder="Type your user name"
@@ -63,7 +65,7 @@ function RegisterForm() {
         </label>
         <input
           {...register("email", { required: true })}
-          className="rounded text-center h-9 border-2 border-black mt-1"
+          className="rounded text-center h-9 border-2  hover:bg-blue-100 border-black mt-1"
           name="email"
           size={35}
           placeholder="Type your e-mail"
@@ -76,7 +78,7 @@ function RegisterForm() {
         </label>
         <input
           {...register("password", { required: true })}
-          className="rounded text-center h-9 border-2 border-black mt-1"
+          className="rounded text-center h-9 border-2 border-black hover:bg-blue-100 mt-1"
           name="password"
           size={35}
           placeholder="Type your password"
@@ -87,13 +89,13 @@ function RegisterForm() {
         <div className="mt-2">
           <div className="">
             <button
-              className="text-lg px-1 h-8 w-44 text-center text-white font-bold bg-blue-400 rounded"
+              className="text-lg px-1 h-8 w-44 text-center text-white font-bold bg-blue-400 hover:bg-blue-300 rounded"
               type="submit"
             >
               Create Account
             </button>
           </div>
-          <div className="mt-2 text-xl text-bold">
+          <div className="mt-2 text-xl font-semibold hover:font-bold">
             <Link to="/login">Registered Already? Login now!</Link>
           </div>
         </div>
