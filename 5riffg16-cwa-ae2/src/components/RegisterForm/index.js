@@ -12,7 +12,7 @@ const schema = yup.object().shape({
   userName: yup
     .string()
     .required("You must enter an User name")
-    .max(6, "User name must have maximum of 8 characters"),
+    .max(6, "Maximum of 6 characters"),
   email: yup
     .string()
     .email("Email is not valid")
