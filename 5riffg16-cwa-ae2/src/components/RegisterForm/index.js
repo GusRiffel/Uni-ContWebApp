@@ -12,7 +12,7 @@ const schema = yup.object().shape({
   userName: yup
     .string()
     .required("You must enter an User name")
-    .max(8, "User name must have maximum of 8 characters"),
+    .max(6, "User name must have maximum of 8 characters"),
   email: yup
     .string()
     .email("Email is not valid")
@@ -53,13 +53,13 @@ function RegisterForm() {
         className="flex flex-col w-96 mx-auto"
         onSubmit={handleSubmit((data) => handleCreateUser(data))}
       >
-        <label htmlFor="userName">User name</label>
+        <label htmlFor="userName">User name (nickname)</label>
         <input
           {...register("userName", { required: true })}
           className="rounded text-center h-9 border-2  hover:bg-blue-100 border-black mt-1"
           name="userName"
           size={35}
-          placeholder="Type your user name"
+          placeholder="Type your user name Max. 6 chars"
           type="userName"
         />
         <p className="text-red-500 font-semibold">{errors.userName?.message}</p>

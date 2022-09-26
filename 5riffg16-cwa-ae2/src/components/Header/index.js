@@ -14,23 +14,23 @@ function Header() {
   return (
     <>
       <div className="w-full flex justify-around items-center mx-auto py-8 bg-[#304D63]">
-        <div className="w-[22rem] text-center text-lg text-white font-bold bg-[#436986] hover:bg-[#5d84a1] rounded">
+        <div className="w-[25rem] text-center text-lg text-white font-bold bg-[#436986] hover:bg-[#5d84a1] rounded">
           <Link to="about" className="p-3">
             <span className="w-full inline-block">What Is Pomodoro?</span>
           </Link>
         </div>
 
-        <div className="w-[22rem] text-center text-lg text-white font-bold bg-[#436986] hover:bg-[#5d84a1]  rounded">
+        <div className="w-[25rem] text-center text-lg text-white font-bold bg-[#436986] hover:bg-[#5d84a1]  rounded">
           <Link to="/" className="p-3">
             <span className="w-full inline-block">It's Time to Focus</span>
           </Link>
         </div>
 
         {currentUser ? (
-          <div className="flex w-[22rem] justify-between">
+          <div className="flex w-[25rem] justify-between">
             <div className="text-left text-lg text-white font-bold bg-[#436986] hover:bg-[#5d84a1]  rounded">
               <Link to="/dashboard" className="p-3">
-                <span className="w-full inline-block">DashBoard</span>
+                <span className="w-full inline-block">History</span>
               </Link>
             </div>
             <div className="text-white font-semibold text-lg ">

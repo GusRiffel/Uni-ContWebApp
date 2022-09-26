@@ -83,7 +83,7 @@ function TodoList() {
           </div>
         )}
       </div>
-      <div>
+      <div className="mb-8">
         {todo.map((todo) => {
           return (
             <TodoItem

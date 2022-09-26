@@ -41,9 +41,9 @@ function SetTimeModal(props) {
               <div className="border-2 border-[#304D63]rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 <div className="flex items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t ">
                   <h3 className="text-3xl font=semibold">
-                    Set your time your{" "}
+                    Set the time to your{" "}
                     {props.isPomodoro ? "Pomodoro " : "break "}
-                    time
+                
                   </h3>
                   <button
                     className="bg-transparent border-0 text-black float-right"

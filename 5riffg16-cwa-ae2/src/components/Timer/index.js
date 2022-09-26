@@ -5,6 +5,7 @@ import useCrud from "../../services/firebase/useCrud";
 import alarm from "../../assets/16900_1461333025.mp3";
 import SetTimeModal from "../SetTimeModal";
 import { Howl } from "howler";
+import ReactTooltip from "react-tooltip";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -30,6 +31,7 @@ function Timer() {
   const { createPomodoroDetails } = useCrud();
   const { currentUser } = useContext(AuthContext);
   const [pomodoroTime, setPomodoroTime] = useState(25);
+  const [tooltip, showTooltip] = useState(true);
 
   useEffect(() => {
     if (timeInSeconds === 0) {
@@ -146,11 +148,28 @@ function Timer() {
           </div>
           <div>
             {isPomodoro && (
-              <SetTimeModal
-                isPomodoro={isPomodoro}
-                onSubmit={handleSetPomodoroTime}
-                className="hover:bg-blue-100 rounded"
-              />
+              <>
+                <div
+                  data-tip
+                  data-for="modal"
+                  onMouseEnter={() => showTooltip(true)}
+                  onMouseLeave={() => {
+                    showTooltip(false);
+                    setTimeout(() => showTooltip(true), 50);
+                  }}
+                >
+                  <SetTimeModal
+                    isPomodoro={isPomodoro}
+                    onSubmit={handleSetPomodoroTime}
+                    className="hover:bg-blue-100 rounded"
+                  />
+                </div>
+                {tooltip && (
+                  <ReactTooltip id="modal">
+                    <span>Click here to set a new time for your Pomodoro!</span>
+                  </ReactTooltip>
+                )}
+              </>
             )}
           </div>
           <div className="w-36 text-center text-lg text-white font-bold bg-red-700 hover:bg-red-500 rounded">
