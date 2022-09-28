@@ -4,13 +4,13 @@ This project is a university assignment where we had to propose a way to help th
 
 ## Techs used
 
-The app was developed using react to create a SPA application.
-To have a better control over the forms react-hook-form was used. 
-Tailwind was used to style it. 
-To make use of tooltips and alert react-toastify and react-tooltip were installed.
-To use sound effects howler was used.
-Yup was used to validate forms.
-Firebase was used as backend and also hosted the app. 
+- The app was developed using react to create a SPA application.
+- To have a better control over the forms react-hook-form was used. 
+- Tailwind was used to style it. 
+- To make use of tooltips and alert react-toastify and react-tooltip were installed.
+- To use sound effects howler was used.
+- Yup was used to validate forms.
+- Firebase was used as backend and also hosted the app. 
 
 ## Available Scripts
 
